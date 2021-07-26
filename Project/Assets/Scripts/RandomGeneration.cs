@@ -36,7 +36,7 @@ public class RandomGeneration : MonoBehaviour
 			Requests(); //spawn new obstacles
 		}
 		time += Time.deltaTime;
-		Debug.Log(time);
+		//Debug.Log(time);
     }
 	
 	//Requests spawns in obstacles
@@ -46,18 +46,22 @@ public class RandomGeneration : MonoBehaviour
         for (int i = 0; i <= 2; i++) //do three times
         {
 			spawnPos = spawnPoints[i].transform.position; //set spawn location
+            var rotationVector = transform.rotation.eulerAngles; //rotation
+            rotationVector.y = 90; //rotation
             int rndName = rnd.Next(0, 4); //Get rand number
             if (rndName == 0)
             {
                 Debug.Log("spawn log");
 				//fetch 1st obstacle from asset path
-				obstacle = AssetDatabase.LoadAssetAtPath("Assets/Models/FBXfiles/logObstacle.fbx", typeof(GameObject)) as GameObject;
+				obstacle = AssetDatabase.LoadAssetAtPath("Assets/Models/FBXfiles/logObstaclePrefab.prefab", typeof(GameObject)) as GameObject;
 				
 				//instantiate obstacle into scene
 				obstacles[i] = Instantiate(obstacle);
+
 				//move newly spawned obstacle to correct location
 				obstacles[i].transform.position = spawnPos;
-				obstacles[i].transform.localScale = 100*obstacles[i].transform.localScale;
+                obstacles[i].transform.rotation = Quaternion.Euler(rotationVector); //rotate
+                obstacles[i].transform.localScale = 2*obstacles[i].transform.localScale;
             }
             else if (rndName == 1)
             {
@@ -67,9 +71,11 @@ public class RandomGeneration : MonoBehaviour
 				
 				//instantiate obstacle into scene
 				obstacles[i] = Instantiate(obstacle);
+
 				//move newly spawned obstacle to correct location
 				obstacles[i].transform.position = spawnPos;
-				obstacles[i].transform.localScale = 100*obstacles[i].transform.localScale;
+                obstacles[i].transform.rotation = Quaternion.Euler(rotationVector); //rotate
+                obstacles[i].transform.localScale = 200*obstacles[i].transform.localScale;
             }
             else if (rndName == 2)
             {
@@ -81,7 +87,8 @@ public class RandomGeneration : MonoBehaviour
 				obstacles[i] = Instantiate(obstacle);
 				//move newly spawned obstacle to correct location
 				obstacles[i].transform.position = spawnPos;
-				obstacles[i].transform.localScale = 100*obstacles[i].transform.localScale;
+                obstacles[i].transform.rotation = Quaternion.Euler(rotationVector); //rotate
+                obstacles[i].transform.localScale = 200*obstacles[i].transform.localScale;
             }
             else if (rndName == 3)
             {
@@ -97,6 +104,7 @@ public class RandomGeneration : MonoBehaviour
         
         for (int i = 0; i <= 2; i++)
         {
+            //Debug.Log("clear" + i);
             Destroy(obstacles[i]);
         }
     }
