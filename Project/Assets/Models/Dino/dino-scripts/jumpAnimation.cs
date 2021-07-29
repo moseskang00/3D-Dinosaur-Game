@@ -9,6 +9,7 @@ public class jumpAnimation : MonoBehaviour
     private bool isJumping = false;
     private bool isDead = false;
     private bool isReset = false;
+    private bool isStart = false;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,17 @@ public class jumpAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /* Starting key */
+        if (Input.GetKeyDown("s") && !isStart)
+        {
+            animator.SetBool("isStart", true);
+            animator.SetBool("isReset", false);
+            isStart = true;
+            isReset = false;
+            isDead = false;
+            Debug.Log("startinggggg");
+        }
+
         /* Jump Animation */
         if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
         {
@@ -35,25 +47,36 @@ public class jumpAnimation : MonoBehaviour
         }
 
         /* Death Animation (also by pressing d) */
-        if(Input.GetKeyDown("d") && !isDead)
+        if (Input.GetKeyDown("d") && !isDead)
         {
             animator.SetBool("isDead", true);
             isDead = true;
             Debug.Log("dead");
             Debug.Log(isDead);
+            Debug.Log(isReset);
         }
 
         /* Reset by pressing r*/
         if (Input.GetKeyDown("r") && !isReset)
         {
-            animator.SetBool("isReset", isReset);
+            animator.SetBool("isReset", true);
+            animator.SetBool("isStart", false);
+            animator.SetBool("isDead", false);
+            animator.SetBool("isWalking", false);
             isReset = true;
-
+            Debug.Log("reset key tapped");
+            isStart = false;
+            Debug.Log(isStart);
         }
-        else if (isReset)
+
+        /* Debug key */
+        if (Input.GetKeyDown("p"))
         {
-            animator.SetBool("isReset", false);
-            isReset = false;
+            Debug.Log(isStart);
+            Debug.Log(isJumping);
+            Debug.Log(isDead);
+            Debug.Log(isReset);
+
         }
     }
 }
