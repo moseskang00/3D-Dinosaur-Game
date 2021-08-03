@@ -79,4 +79,22 @@ public class jumpAnimation : MonoBehaviour
 
         }
     }
+
+    private void OnTriggerEnter(Collier other)
+    {
+        if (other.tag == "obstacle")
+        {
+            endGame();
+        }
+    }
+
+    private void endGame()
+    {
+        animator.SetBool("isDead", true);
+        isDead = true;
+        Debug.Log("dead");
+        Debug.Log(isDead);
+        Debug.Log(isReset);
+    }
+
 }
