@@ -10,6 +10,7 @@ public class jumpAnimation : MonoBehaviour
     private bool isDead = false;
     private bool isReset = false;
     private bool isStart = false;
+    public bool end_flag = false;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +29,7 @@ public class jumpAnimation : MonoBehaviour
             isStart = true;
             isReset = false;
             isDead = false;
-            Debug.Log("startinggggg");
+            end_flag = true;
         }
 
         /* Jump Animation */
@@ -37,23 +38,12 @@ public class jumpAnimation : MonoBehaviour
             animator.SetBool("isJumping", true);
             isJumping = true;
             animator.SetBool("isWalking", false);
-            Debug.Log("jump");
         }
         else if (isJumping)
         {
             animator.SetBool("isJumping", false);
             isJumping = false;
             animator.SetBool("isWalking", true);
-        }
-
-        /* Death Animation (also by pressing d) */
-        if (Input.GetKeyDown("d") && !isDead)
-        {
-            animator.SetBool("isDead", true);
-            isDead = true;
-            Debug.Log("dead");
-            Debug.Log(isDead);
-            Debug.Log(isReset);
         }
 
         /* Reset by pressing r*/
@@ -80,7 +70,7 @@ public class jumpAnimation : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collier other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "obstacle")
         {
@@ -92,9 +82,11 @@ public class jumpAnimation : MonoBehaviour
     {
         animator.SetBool("isDead", true);
         isDead = true;
-        Debug.Log("dead");
-        Debug.Log(isDead);
-        Debug.Log(isReset);
+        end_flag = false;
     }
 
+    public bool end()
+    {
+        return end_flag;
+    }
 }

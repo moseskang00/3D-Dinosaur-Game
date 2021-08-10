@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5864937258308720122
+--- !u!1 &398035044231665612
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,11 +8,12 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6498590840787668800}
-  - component: {fileID: 7890441121561477349}
-  - component: {fileID: 5360564680385262639}
-  - component: {fileID: 6747826611407523195}
-  - component: {fileID: 6747826611407523140}
+  - component: {fileID: 1066731265134529910}
+  - component: {fileID: 4134887174781436627}
+  - component: {fileID: 2199699127665325593}
+  - component: {fileID: 668629592683810637}
+  - component: {fileID: 668629592683810674}
+  - component: {fileID: 6116569574631324894}
   m_Layer: 0
   m_Name: logObstaclePrefab
   m_TagString: Untagged
@@ -20,35 +21,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6498590840787668800
+--- !u!4 &1066731265134529910
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5864937258308720122}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_GameObject: {fileID: 398035044231665612}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalScale: {x: 80, y: 80, z: 80}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7890441121561477349
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!33 &4134887174781436627
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5864937258308720122}
+  m_GameObject: {fileID: 398035044231665612}
   m_Mesh: {fileID: -4875440510467658494, guid: 26a9985a68e3e54418e1469f534094c1, type: 3}
---- !u!23 &5360564680385262639
+--- !u!23 &2199699127665325593
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5864937258308720122}
+  m_GameObject: {fileID: 398035044231665612}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -83,13 +84,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!111 &6747826611407523195
+--- !u!111 &668629592683810637
 Animation:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5864937258308720122}
+  m_GameObject: {fileID: 398035044231665612}
   m_Enabled: 1
   serializedVersion: 3
   m_Animation: {fileID: 7400000, guid: 8d03586955fc91b44b8d00c5a5a8ba82, type: 2}
@@ -99,14 +100,14 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!95 &6747826611407523140
+--- !u!95 &668629592683810674
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5864937258308720122}
+  m_GameObject: {fileID: 398035044231665612}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 3627f4366ed060f41aca2ec720308902, type: 2}
@@ -118,3 +119,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6116569574631324894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398035044231665612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77cca52450620bb488ce3835df8aba86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obs: {fileID: 1066731265134529910}
+  speed: 1
+  endPosition: {x: 0, y: 0, z: 0}
+  gameEnd: 0
+  gameStart: 0
+  gate: 1
