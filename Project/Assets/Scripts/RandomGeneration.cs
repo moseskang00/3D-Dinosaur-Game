@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class RandomGeneration : MonoBehaviour
 {
-	//Script to randomly spawn obstacles on path
-	//Script is placed on GroundPlane object in scene
-	
+    //Script to randomly spawn obstacles on path
+    //Script is placed on GroundPlane object in scene
+
+    public float pointIncrementPerSecond; //number by which points increased
+    public float score;
     protected GameObject obstacle; //Pointer to current obstacle
 	protected GameObject[] obstacles = new GameObject[3]; //Array of currently loaded obstacles
     public GameObject[] spawnPoints = new GameObject[3]; //Spawn Points, filed with empty 3d objects in scene
@@ -31,11 +34,13 @@ public class RandomGeneration : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ja = GameObject.FindObjectOfType<jumpAnimation>(); 
+        ja = GameObject.FindObjectOfType<jumpAnimation>();
+        pointIncrementPerSecond = 5;
+       
     }
 
     // Update is called once per frame
-    void Update()
+   void Update()
     { //will want to call Requests() every few seconds
         
 		if (Input.GetKeyDown("s"))
@@ -43,13 +48,14 @@ public class RandomGeneration : MonoBehaviour
             StartCoroutine(CountdownStart());
         }
 
+        updateScore();//update score as player survives obstacles
+
         if (flag == true)
         {
             flag = ja.end();
             if (flag == false)
             {
-                countdownDisplay.gameObject.SetActive(true);
-                countdownDisplay.text = "Game Over! Press R to restart.";
+                StartCoroutine(CountdownEnd());
             }
         }
 
@@ -65,6 +71,13 @@ public class RandomGeneration : MonoBehaviour
 		}
 		time += Time.deltaTime;
         //Debug.Log(time);
+
+
+        //restart scene when r is pressed
+        if (Input.GetKeyDown("r"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 	
 	//Requests spawns in obstacles
@@ -253,13 +266,35 @@ public class RandomGeneration : MonoBehaviour
                 countdownDisplay.text = "GO!";
                 yield return new WaitForSeconds(1f);
                 flag = true;
-                countdownDisplay.gameObject.SetActive(false);
+                //countdownDisplay.gameObject.SetActive(false);
             }
         }
 
 
 
     }
+
+   
+   //display players score and game over message 
+    IEnumerator CountdownEnd()
+    {
+        countdownDisplay.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        countdownDisplay.text = "Your score:" + (int)score;
+        yield return new WaitForSeconds(2);
+        countdownDisplay.text = "Game Over! Press R to restart.";
+    }
+
+    //update function to update score as long as flag is true
+    public void updateScore()
+    {
+        if (flag == true)
+        {
+            countdownDisplay.text = (int)score + ".";
+            score += pointIncrementPerSecond * Time.deltaTime;
+        }
+    }
+
     public bool getFlag()
     {
         return flag;
