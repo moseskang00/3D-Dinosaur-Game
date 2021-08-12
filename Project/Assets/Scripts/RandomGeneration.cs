@@ -41,13 +41,11 @@ public class RandomGeneration : MonoBehaviour
 		if (Input.GetKeyDown("s"))
         {
             StartCoroutine(CountdownStart());
-            Debug.Log(flag);
         }
 
         if (flag == true)
         {
             flag = ja.end();
-            Debug.Log("dnsjadnkjaskjnd " + flag);
             if (flag == false)
             {
                 countdownDisplay.gameObject.SetActive(true);
@@ -67,7 +65,6 @@ public class RandomGeneration : MonoBehaviour
 		}
 		time += Time.deltaTime;
         //Debug.Log(time);
-        Debug.Log(flag);
     }
 	
 	//Requests spawns in obstacles
@@ -250,14 +247,18 @@ public class RandomGeneration : MonoBehaviour
             yield return new WaitForSeconds(1f);
 
             countdownTimer--;
+            Debug.Log(countdownTimer);
+            if (countdownTimer == 0)
+            {
+                countdownDisplay.text = "GO!";
+                yield return new WaitForSeconds(1f);
+                flag = true;
+                countdownDisplay.gameObject.SetActive(false);
+            }
         }
 
-        countdownDisplay.text = "GO!";
-        flag = true;
 
-        yield return new WaitForSeconds(1f);
 
-        countdownDisplay.gameObject.SetActive(false);
     }
     public bool getFlag()
     {
